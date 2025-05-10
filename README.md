@@ -1,36 +1,51 @@
-## Dev
+# Microservicios - Products Launcher
 
-1. clonar el repositorio
-2. Crear un .env basado en el .en.template
-3. ejecutar el comando `docker compose up --build --watch`
+## 🚀 Desarrollo
 
-### Pasos para crear los Git Submodules
+### Requisitos Previos
+1. Clonar el repositorio
+2. Crear un archivo `.env` basado en el `.env.template`
+3. Ejecutar el comando para reconstruir los sub-módulos:
+   ```bash
+   git submodule update --init --recursive
+   ```
+4. Iniciar los servicios con Docker:
+   ```bash
+   docker compose up --build --watch
+   ```
 
+## 📦 Gestión de Git Submodules
+
+### Creación de Submodules
 1. Crear un nuevo repositorio en GitHub
 2. Clonar el repositorio en la máquina local
-3. Añadir el submodule, donde `repository_url` es la url del repositorio y `directory_name` es el nombre de la carpeta donde quieres que se guarde el sub-módulo (no debe de existir en el proyecto)
-```
-git submodule add <repository_url> <directory_name>
-```
-4. Añadir los cambios al repositorio (git add, git commit, git push)
-Ej:
-```
-git add .
-git commit -m "Add submodule"
-git push
-```
-5. Inicializar y actualizar Sub-módulos, cuando alguien clona el repositorio por primera vez, debe de ejecutar el siguiente comando para inicializar y actualizar los sub-módulos
-```
-git submodule update --init --recursive
-```
-6. Para actualizar las referencias de los sub-módulos
-```
-git submodule update --remote
-```
+3. Añadir el submodule:
+   ```bash
+   git submodule add <repository_url> <directory_name>
+   ```
+   > Nota: `directory_name` debe ser una carpeta que no exista en el proyecto
 
+4. Confirmar los cambios:
+   ```bash
+   git add .
+   git commit -m "Add submodule"
+   git push
+   ```
 
-## Importante
-Si se trabaja en el repositorio que tiene los sub-módulos, **primero actualizar y hacer push** en el sub-módulo y **después** en el repositorio principal. 
+### Comandos Útiles
+- Inicializar y actualizar sub-módulos (para nuevos clones):
+  ```bash
+  git submodule update --init --recursive
+  ```
+- Actualizar referencias de sub-módulos:
+  ```bash
+  git submodule update --remote
+  ```
 
-Si se hace al revés, se perderán las referencias de los sub-módulos en el repositorio principal y tendremos que resolver conflictos.
+## ⚠️ Importante
+Al trabajar con sub-módulos, seguir este orden:
+1. **Primero**: Actualizar y hacer push en el sub-módulo
+2. **Después**: Actualizar y hacer push en el repositorio principal
+
+> ⚠️ Si se hace en orden inverso, se perderán las referencias de los sub-módulos y habrá que resolver conflictos.
 
