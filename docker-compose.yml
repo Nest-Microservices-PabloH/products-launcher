@@ -20,9 +20,9 @@ services:
       - POSTGRES_PASSWORD=123456
       - POSTGRES_DB=ordersdb
 
-#========================
-#CLIENT-GATEWAY
-#=======================
+  #========================
+  #CLIENT-GATEWAY
+  #=======================
   client-gateway:
     container_name: client-gateway
     build: ./client-gateway
@@ -42,9 +42,9 @@ services:
       - NATS_SERVERS=nats://nats-server:4222
       - PORT=3000
 
-#========================
-#PRODUCTS-MS
-#=======================
+  #========================
+  #PRODUCTS-MS
+  #=======================
   products-ms:
     container_name: products-ms
     build: ./products-ms
@@ -63,9 +63,9 @@ services:
       - PORT=3001
       - DATABASE_URL=file:./dev.db
 
-#========================
-#ORDERS-MS
-#=======================
+  #========================
+  #ORDERS-MS
+  #=======================
   orders-ms:
     container_name: orders-ms
     depends_on:
@@ -86,9 +86,9 @@ services:
       - PORT=3002
       - DATABASE_URL=postgresql://postgres:123456@orders-db:5432/ordersdb?schema=public
 
-#========================
-#PAYMENT-MS
-#=======================
+  #========================
+  #PAYMENT-MS
+  #=======================
   payments-ms:
     container_name: payments-ms
     build: ./payments-ms
@@ -112,5 +112,22 @@ services:
       - STRIPE_CANCEL_URL=${STRIPE_CANCEL_URL}
       - STRIPE_ENDPOINT_SECRET=${STRIPE_ENDPOINT_SECRET}
 
-
-
+  #========================
+  #AUTH-MS
+  #=======================
+  auth-ms:
+    container_name: auth-ms
+    build: ./auth-ms
+    develop:
+      watch:
+        - action: sync
+          path: ./auth-ms/src
+          target: /usr/src/app/src
+          ignore:
+            - node_modules
+            - dist
+            - .git
+    command: pnpm run start:dev
+    environment:
+      - NATS_SERVERS=nats://nats-server:4222
+      - PORT=3004
