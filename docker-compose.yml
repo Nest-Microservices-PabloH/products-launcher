@@ -42,9 +42,9 @@ services:
       - NATS_SERVERS=nats://nats-server:4222
       - PORT=3000
 
-  #========================
-  #PRODUCTS-MS
-  #=======================
+  # ========================
+  # PRODUCTS-MS
+  # =======================
   products-ms:
     container_name: products-ms
     build: ./products-ms
@@ -131,3 +131,5 @@ services:
     environment:
       - NATS_SERVERS=nats://nats-server:4222
       - PORT=3004
+      - DATABASE_URL=${AUTH_DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
