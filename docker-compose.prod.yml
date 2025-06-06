@@ -9,7 +9,7 @@ services:
     build:
       context: ./client-gateway
       dockerfile: dockerfile.prod
-    image: client-gateway:latest
+    image: southamerica-east1-docker.pkg.dev/tienda-microservicios-pabloh/image-registry/client-gateway:latest
     ports:
       - "${CLIENT_GATEWAY_PORT}:${CLIENT_GATEWAY_PORT}"
     environment:
@@ -20,7 +20,7 @@ services:
     build:
       context: ./products-ms
       dockerfile: dockerfile.prod
-    image: products-ms:latest
+    image: southamerica-east1-docker.pkg.dev/tienda-microservicios-pabloh/image-registry/products-ms:latest
     environment:
       - NATS_SERVERS=nats://nats-server:4222
       - PORT=3001
@@ -32,7 +32,7 @@ services:
       dockerfile: dockerfile.prod
       args:
         - ORDERS_DATABASE_URL=${ORDERS_DATABASE_URL}
-    image: orders-ms:latest
+    image: southamerica-east1-docker.pkg.dev/tienda-microservicios-pabloh/image-registry/orders-ms:latest
     environment:
       - NATS_SERVERS=nats://nats-server:4222
       - PORT=3002
@@ -42,7 +42,7 @@ services:
     build:
       context: ./payments-ms
       dockerfile: dockerfile.prod
-    image: payments-ms:latest
+    image: southamerica-east1-docker.pkg.dev/tienda-microservicios-pabloh/image-registry/payments-ms:latest
     ports:
       - "${PAYMENTS_MS_PORT}:${PAYMENTS_MS_PORT}"
     environment:
@@ -57,7 +57,7 @@ services:
     build:
       context: ./auth-ms
       dockerfile: dockerfile.prod
-    image: auth-ms:latest
+    image: southamerica-east1-docker.pkg.dev/tienda-microservicios-pabloh/image-registry/auth-ms:latest
     environment:
       - NATS_SERVERS=nats://nats-server:4222
       - PORT=3004
